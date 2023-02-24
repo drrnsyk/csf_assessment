@@ -2,6 +2,6 @@
 
 <div>
     <ul *ngFor="let c of cuisines">
-        {{c}}
+        <a [routerLink]="[ '/', c ]">{{c}}</a>
     </ul>
 </div>

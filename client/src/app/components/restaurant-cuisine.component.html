@@ -1,1 +1,14 @@
-<p>restaurant-cuisine works!</p>
+<h1>List of {{cuisine}} Restaurants</h1>
+
+<div>
+    <ul *ngFor="let r of restaurants">
+        {{r.name}}
+    </ul>
+</div>
+
+<div>
+    <a [routerLink]="[ '/' ]">
+        <button type="button">Back</button>
+    </a>
+
+</div>

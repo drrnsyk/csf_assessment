@@ -1,10 +1,16 @@
 import { HttpClient, HttpHeaders, HttpParams } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { firstValueFrom } from "rxjs";
+import { BehaviorSubject, firstValueFrom } from "rxjs";
 import { Restaurant } from "./models";
 
 @Injectable()
 export class RestaurantService {
+
+	// declare a subject to emit event out and for other components to listen
+    // Create a BehaviorSubject to hold the string for cuisine searched
+    onCuisineSearch: BehaviorSubject<string | null> = new BehaviorSubject<string | null>(null);
+    // Make the BehaviorSubject an observable to other components
+    onCuisineSearch$ = this.onCuisineSearch.asObservable();
 
 	constructor(private http: HttpClient) {}
 	// TODO Task 2 
@@ -17,31 +23,19 @@ export class RestaurantService {
 		)
 	}
 
+	// TODO Task 3 
+	// Use the following method to get a list of restaurants by cuisine
+	// You can add any parameters (if any) and the return type 
+	// DO NOT CHNAGE THE METHOD'S NAME
+	public getRestaurantsByCuisine(cuisine: string): Promise<Restaurant[]> {
+		return firstValueFrom<Restaurant[]>(
+			this.http.get<Restaurant[]>(`/api/${cuisine}/restaurants`)
+		)
+	}
 
 }
 
 
-// @Injectable()
-// export class RestaurantService {
-
-// 	// // TODO Task 2 
-// 	// // Use the following method to get a list of cuisines
-// 	// // You can add any parameters (if any) and the return type 
-// 	// // DO NOT CHNAGE THE METHOD'S NAME
-// 	// public getCuisineList(???) {
-// 	// 	// Implememntation in here
-
-// 	// }
-
-// 	// // TODO Task 3 
-// 	// // Use the following method to get a list of restaurants by cuisine
-// 	// // You can add any parameters (if any) and the return type 
-// 	// // DO NOT CHNAGE THE METHOD'S NAME
-// 	// public getRestaurantsByCuisine(???) {
-// 	// 	// Implememntation in here
-
-// 	// }
-	
 // 	// // TODO Task 4
 // 	// // Use this method to find a specific restaurant
 // 	// // You can add any parameters (if any) 

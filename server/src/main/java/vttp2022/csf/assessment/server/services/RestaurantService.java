@@ -36,6 +36,8 @@ public class RestaurantService {
 			arrBuilder.add(c);
 
         JsonArray jsonArrCuisines = arrBuilder.build();
+
+        // convert the json array into a string and replace '/' with '_'
         String jsonArrCuisinesStr = jsonArrCuisines.toString().replace('/', '_');
 
         System.out.println(jsonArrCuisinesStr);
@@ -43,14 +45,30 @@ public class RestaurantService {
         return jsonArrCuisinesStr;
 	}
 
-	// // // TODO Task 3 
-	// // // Use the following method to get a list of restaurants by cuisine
-	// // // You can add any parameters (if any) and the return type 
-	// // // DO NOT CHNAGE THE METHOD'S NAME
-	// // public ??? getRestaurantsByCuisine(???) {
-	// // 	// Implmementation in here
+
+	// TODO Task 3 
+	// Use the following method to get a list of restaurants by cuisine
+	// You can add any parameters (if any) and the return type 
+	// DO NOT CHNAGE THE METHOD'S NAME
+	public String getRestaurantsByCuisine(String cuisine) {
 		
-	// // }
+        // replace '_' with '/'
+        String cuisineSlash = cuisine.replace("_", "/");
+
+        List<Restaurant> restaurants = this.restaurantRepo.getRestaurantsByCuisine(cuisineSlash);
+
+        JsonArrayBuilder arrBuilder = Json.createArrayBuilder();
+		for (Restaurant r: restaurants)
+			arrBuilder.add(r.toJson());
+
+        JsonArray jsonArrRestaurant = arrBuilder.build();
+
+        String jsonArrRestaurantStr = jsonArrRestaurant.toString();
+
+        System.out.println(jsonArrRestaurantStr);
+
+		return jsonArrRestaurantStr;
+	}
 
 	// // TODO Task 4
 	// // Use this method to find a specific restaurant

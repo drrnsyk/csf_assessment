@@ -7,6 +7,7 @@ import org.bson.Document;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Repository;
 
@@ -24,25 +25,34 @@ public class RestaurantRepository {
 	// You can add any parameters (if any) and the return type 
 	// DO NOT CHNAGE THE METHOD'S NAME
 	// Write the Mongo native query above for this method
-
     /*
      * db.comments.distinct('cuisine') 
      */
 	public List<String> getCuisines() {
-		// Implmementation in here
         return mongoTemplate.findDistinct(new Query(), "cuisine", "comments", String.class);
 	}
 
-	// // TODO Task 3
-	// // Use this method to retrive a all restaurants for a particular cuisine
-	// // You can add any parameters (if any) and the return type 
-	// // DO NOT CHNAGE THE METHOD'S NAME
-	// // Write the Mongo native query above for this method
-	// //  
-	// public ??? getRestaurantsByCuisine(???) {
-	// 	// Implmementation in here
+	// TODO Task 3
+	// Use this method to retrive a all restaurants for a particular cuisine
+	// You can add any parameters (if any) and the return type 
+	// DO NOT CHNAGE THE METHOD'S NAME
+	// Write the Mongo native query above for this method
+	/*
+     * db.comments.find({
+     *      cuisine: { $in: [ 'asian' ] }
+     * })
+     * .sort( { name: 1 })
+     */
+	public List<Restaurant> getRestaurantsByCuisine(String cuisineSlash) {
+        Criteria criteria = Criteria.where("cuisine")
+            .in(cuisineSlash);
+         Query query = Query.query(criteria);
 
-	// }
+    return mongoTemplate.find(query, Document.class, "comments")
+       .stream()
+       .map(d -> Restaurant.create(d))
+       .toList();
+	}
 
 	// // TODO Task 4
 	// // Use this method to find a specific restaurant
