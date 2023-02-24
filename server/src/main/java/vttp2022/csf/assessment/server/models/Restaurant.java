@@ -1,7 +1,5 @@
 package vttp2022.csf.assessment.server.models;
 
-import java.util.List;
-
 import org.bson.Document;
 
 import jakarta.json.Json;

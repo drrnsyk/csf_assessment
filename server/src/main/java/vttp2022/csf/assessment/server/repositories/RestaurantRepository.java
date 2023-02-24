@@ -5,7 +5,6 @@ import java.util.Optional;
 
 import org.bson.Document;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
@@ -26,10 +25,10 @@ public class RestaurantRepository {
 	// DO NOT CHNAGE THE METHOD'S NAME
 	// Write the Mongo native query above for this method
     /*
-     * db.comments.distinct('cuisine') 
+     * db.details.distinct('cuisine') 
      */
 	public List<String> getCuisines() {
-        return mongoTemplate.findDistinct(new Query(), "cuisine", "comments", String.class);
+        return mongoTemplate.findDistinct(new Query(), "cuisine", "details", String.class);
 	}
 
 	// TODO Task 3
@@ -38,7 +37,7 @@ public class RestaurantRepository {
 	// DO NOT CHNAGE THE METHOD'S NAME
 	// Write the Mongo native query above for this method
 	/*
-     * db.comments.find({
+     * db.details.find({
      *      cuisine: { $in: [ 'asian' ] }
      * })
      * .sort( { name: 1 })
@@ -48,7 +47,7 @@ public class RestaurantRepository {
             .in(cuisineSlash);
          Query query = Query.query(criteria);
 
-    return mongoTemplate.find(query, Document.class, "comments")
+    return mongoTemplate.find(query, Document.class, "details")
        .stream()
        .map(d -> Restaurant.create(d))
        .toList();
@@ -61,13 +60,13 @@ public class RestaurantRepository {
 	// DO NOT CHNAGE THE METHOD'S NAME OR THE RETURN TYPE
 	// Write the Mongo native query above for this method
 	/*
-     * db.comments.find({ restaurant_id: "30112340" })
+     * db.details.find({ restaurant_id: "30112340" })
      */
 	public Optional<Restaurant> getRestaurant(String id) {
 		Criteria c = Criteria.where("restaurant_id").is(id);
         Query q = Query.query(c);
 
-        Document d = mongoTemplate.findOne(q, Document.class, "comments");
+        Document d = mongoTemplate.findOne(q, Document.class, "details");
         
         Restaurant restaurant = Restaurant.create(d);
 
@@ -78,16 +77,16 @@ public class RestaurantRepository {
 
 	}
 
-	// // TODO Task 5
-	// // Use this method to insert a comment into the restaurant database
-	// // DO NOT CHNAGE THE METHOD'S NAME OR THE RETURN TYPE
-	// // Write the Mongo native query above for this method
-	// //  
-	// public void addComment(Comment comment) {
-	// 	// Implmementation in here
-		
-	// }
-	
-	// // You may add other methods to this class
+
+	// TODO Task 5
+	// Use this method to insert a comment into the restaurant database
+	// DO NOT CHNAGE THE METHOD'S NAME OR THE RETURN TYPE
+	// Write the Mongo native query above for this method
+	/*
+     * db.comments.insert({ comment: "comment" })
+     */
+	public void addComment(Comment comment) {
+		mongoTemplate.insert(comment, "comments");	
+	}
 
 }

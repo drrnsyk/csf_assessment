@@ -8,10 +8,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import jakarta.json.JsonObject;
+import vttp2022.csf.assessment.server.models.Comment;
 import vttp2022.csf.assessment.server.models.Restaurant;
 import vttp2022.csf.assessment.server.services.RestaurantService;
 
@@ -62,6 +65,15 @@ public class RestaurantController {
 
         return ResponseEntity.ok(joStrRestaurant);
 
+    }
+
+    @PostMapping(value="/comments")
+    @ResponseBody
+    public ResponseEntity<String> addComment(@RequestBody Comment comment) {
+        
+        this.restaurantSvc.addComment(comment);
+
+        return ResponseEntity.ok(null);
     }
 
 }

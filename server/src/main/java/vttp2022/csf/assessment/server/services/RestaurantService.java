@@ -80,14 +80,11 @@ public class RestaurantService {
 	}
 
 
+	// TODO Task 5
+	// Use this method to insert a comment into the restaurant database
+	// DO NOT CHNAGE THE METHOD'S NAME OR THE RETURN TYPE
+	public void addComment(Comment comment) {
+		this.restaurantRepo.addComment(comment);
+	}
 
-	// // TODO Task 5
-	// // Use this method to insert a comment into the restaurant database
-	// // DO NOT CHNAGE THE METHOD'S NAME OR THE RETURN TYPE
-	// public void addComment(Comment comment) {
-	// 	// Implmementation in here
-		
-	// }
-	// //
-	// // You may add other methods to this class
 }
