@@ -42,7 +42,7 @@ export class RestaurantCuisineComponent implements OnInit, OnDestroy{
 
 
   ngOnDestroy(): void {
-      this.params$.unsubscribe
+      this.params$.unsubscribe()
   }
 
 

@@ -42,18 +42,20 @@ export class RestaurantService {
 			this.http.get<Restaurant>(`/api/cuisine/${id}`)
 		)
 	}
-	
+
+	// TODO Task 5
+	// Use this method to submit a comment
+	// DO NOT CHANGE THE METHOD'S NAME OR SIGNATURE
+	public postComment(comment: Comment): Promise<any> {
+
+		const headers = new HttpHeaders()
+		.set('Content-Type', 'application/json')
+		.set('Accept', 'application/json')
+
+		return firstValueFrom(
+			this.http.post<Comment>(`/api/comments`, { headers: headers} )
+		)
+
+	}
+
 }
-
-
-
-
-// 	// // TODO Task 5
-// 	// // Use this method to submit a comment
-// 	// // DO NOT CHANGE THE METHOD'S NAME OR SIGNATURE
-// 	// public postComment(comment: Comment): Promise<any> {
-// 	// 	// Implememntation in here
-
-// 	// }
-
-// }
