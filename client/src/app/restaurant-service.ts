@@ -33,17 +33,20 @@ export class RestaurantService {
 		)
 	}
 
+	// TODO Task 4
+	// Use this method to find a specific restaurant
+	// You can add any parameters (if any) 
+	// DO NOT CHNAGE THE METHOD'S NAME OR THE RETURN TYPE
+	public getRestaurant(id: string): Promise<Restaurant> {
+		return firstValueFrom<Restaurant>(
+			this.http.get<Restaurant>(`/api/cuisine/${id}`)
+		)
+	}
+	
 }
 
 
-// 	// // TODO Task 4
-// 	// // Use this method to find a specific restaurant
-// 	// // You can add any parameters (if any) 
-// 	// // DO NOT CHNAGE THE METHOD'S NAME OR THE RETURN TYPE
-// 	// public getRestaurant(???): Promise<Restaurant> {
-// 	// 	// Implememntation in here
 
-// 	// }
 
 // 	// // TODO Task 5
 // 	// // Use this method to submit a comment

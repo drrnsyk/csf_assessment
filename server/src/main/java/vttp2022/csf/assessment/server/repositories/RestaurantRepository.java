@@ -54,16 +54,29 @@ public class RestaurantRepository {
        .toList();
 	}
 
-	// // TODO Task 4
-	// // Use this method to find a specific restaurant
-	// // You can add any parameters (if any) 
-	// // DO NOT CHNAGE THE METHOD'S NAME OR THE RETURN TYPE
-	// // Write the Mongo native query above for this method
-	// //  
-	// public Optional<Restaurant> getRestaurant(???) {
-	// 	// Implmementation in here
-		
-	// }
+
+	// TODO Task 4
+	// Use this method to find a specific restaurant
+	// You can add any parameters (if any) 
+	// DO NOT CHNAGE THE METHOD'S NAME OR THE RETURN TYPE
+	// Write the Mongo native query above for this method
+	/*
+     * db.comments.find({ restaurant_id: "30112340" })
+     */
+	public Optional<Restaurant> getRestaurant(String id) {
+		Criteria c = Criteria.where("restaurant_id").is(id);
+        Query q = Query.query(c);
+
+        Document d = mongoTemplate.findOne(q, Document.class, "comments");
+        
+        Restaurant restaurant = Restaurant.create(d);
+
+        if (null == restaurant)
+            return Optional.empty();
+
+        return Optional.of(restaurant);
+
+	}
 
 	// // TODO Task 5
 	// // Use this method to insert a comment into the restaurant database

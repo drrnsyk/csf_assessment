@@ -70,14 +70,16 @@ public class RestaurantService {
 		return jsonArrRestaurantStr;
 	}
 
-	// // TODO Task 4
-	// // Use this method to find a specific restaurant
-	// // You can add any parameters (if any) 
-	// // DO NOT CHNAGE THE METHOD'S NAME OR THE RETURN TYPE
-	// public Optional<Restaurant> getRestaurant() {
-	// 	// Implmementation in here
-		
-	// }
+
+    // 	TODO Task 4
+	// Use this method to find a specific restaurant
+	// You can add any parameters (if any) 
+	// DO NOT CHNAGE THE METHOD'S NAME OR THE RETURN TYPE
+	public Optional<Restaurant> getRestaurant(String id) {
+        return this.restaurantRepo.getRestaurant(id);
+	}
+
+
 
 	// // TODO Task 5
 	// // Use this method to insert a comment into the restaurant database

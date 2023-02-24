@@ -2,7 +2,7 @@
 
 <div>
     <ul *ngFor="let r of restaurants">
-        {{r.name}}
+        <a [routerLink]="[ '/', r.cuisine, r.restaurantId ]">{{r.name}}</a>
     </ul>
 </div>
 
